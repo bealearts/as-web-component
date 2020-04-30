@@ -1,0 +1,35 @@
+{
+  "name": "as-component",
+  "version": "1.0.0",
+  "description": "Web Components from pure functions",
+  "main": "src/asComponent.mjs",
+  "scripts": {
+    "prepare": "snowpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "browser-sync start --server --watch"
+  },
+  "keywords": [
+    "web",
+    "component",
+    "pure",
+    "function"
+  ],
+  "author": "David Beale",
+  "license": "MIT",
+  "dependencies": {
+    "fn-args": "^5.0.0",
+    "param-case": "^3.0.3",
+    "shortid": "^2.2.15"
+  },
+  "snowpack": {
+    "webDependencies": [
+      "fn-args",
+      "param-case",
+      "shortid"
+    ]
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.7",
+    "snowpack": "^1.7.0"
+  }
+}
