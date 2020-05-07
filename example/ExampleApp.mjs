@@ -1,12 +1,17 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
-import asComponent from '../src/asComponent.mjs';
+import asWebComponent from '../src/asWebComponent.mjs';
 
-function ExampleApp(title) {
+import Time from './Time.mjs';
+import Counter from './Counter.mjs';
+
+function ExampleApp(name) {
   return html`
     <main>
-      <h1>${title}</h1>
+      <h1>${name}</h1>
+      <p>Current time is: <${Time} /></p>
+      <${Counter} />
     </main>
 `;
 }
 
-export default asComponent(ExampleApp, render);
+export default asWebComponent(ExampleApp, render);

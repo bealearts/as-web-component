@@ -1,8 +1,6 @@
-import funcArgs from '/web_modules/fn-args.js';
-import { paramCase } from "/web_modules/param-case.js";
-import shortid from '/web_modules/shortid.js';
+import { getName, getAttributes } from './utils.mjs';
 
-export default function asComponent(func, renderer) {
+export default function asWebComponent(func, renderer) {
   const name = getName(func);
   const attributes = getAttributes(func);
 
@@ -13,6 +11,10 @@ export default function asComponent(func, renderer) {
       this.attachShadow({ mode: 'open' });
 
       this.render = render.bind(this);
+      this.invalidate = this.invalidate.bind(this);
+
+      this.func = func.bind(this);
+      this.generator = null;
     }
 
     static define(elementName, customElementRegistry = window.customElements) {
@@ -44,26 +46,28 @@ export default function asComponent(func, renderer) {
     }
   }
 
-  function render() {
-    if (!this.isConnected) return;
-
+  async function render() {
     const args = attributes
       .map(attr => this.getAttribute(attr));
 
-    renderer(func.apply(this, args), this.shadowRoot);
+    if (!this.generator) {
+      const result = this.func(args);
+      if (!result.next) {
+        const content = await result;
+        renderer(content, this.shadowRoot);
+      } else {
+        this.generator = result;
+      }
+    }
+
+    if (this.generator) {
+      const iteration = await this.generator.next(args);
+      if (iteration.done) return;
+      renderer(iteration.value, this.shadowRoot);
+    }
   }
 
   Comp.define(name);
 
   return name;
-}
-
-
-function getAttributes(func) {
-  const args = funcArgs(func);
-  return args.map(arg => paramCase(arg));
-}
-
-function getName(func) {
-  return `${paramCase(func.name)}-${shortid().toLowerCase()}`;
 }

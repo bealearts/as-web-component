@@ -1,8 +1,8 @@
 {
-  "name": "as-component",
+  "name": "as-web-component",
   "version": "1.0.0",
-  "description": "Web Components from pure functions",
-  "main": "src/asComponent.mjs",
+  "description": "Web Components from functions",
+  "main": "src/asWebComponent.mjs",
   "scripts": {
     "prepare": "snowpack",
     "test": "echo \"Error: no test specified\" && exit 1",

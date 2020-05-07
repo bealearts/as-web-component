@@ -1,8 +1,8 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
-import asComponent from '../';
+import asWebComponent from '../';
 
 function PreactComponent(name) {
   return html`<p>Hello ${name}</p>`;
 }
 
-export default asComponent(PreactComponent, rendner);
+export default asWebComponent(PreactComponent, rendner);
