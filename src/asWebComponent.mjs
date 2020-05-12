@@ -48,10 +48,13 @@ export default function asWebComponent(func, renderer) {
 
   async function render() {
     const args = attributes
-      .map(attr => this.getAttribute(attr));
+      .map(attr => {
+        const value =  this.getAttribute(attr);
+        return value === null ? undefined : value;
+      });
 
     if (!this.generator) {
-      const result = this.func(args);
+      const result = this.func(...args);
       if (!result.next) {
         const content = await result;
         renderer(content, this.shadowRoot);

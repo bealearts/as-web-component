@@ -12,7 +12,7 @@ function* Time() {
         }
       </style>
 
-      <p>${now()}</p>
+      <span>${now()}</span>
   `;
   }
 
