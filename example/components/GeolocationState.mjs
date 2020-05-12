@@ -1,7 +1,7 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
 import asWebComponent from '../../src/asWebComponent.mjs';
 
-async function GeolocationState(name) {
+async function GeolocationState() {
   const result = await navigator.permissions.query({
     name:'geolocation'
   });

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Web Components from functions",
   "main": "src/asWebComponent.mjs",
+  "module": "src/asWebComponent.mjs",
   "scripts": {
     "prepare": "snowpack",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -18,7 +18,7 @@ Web Components from functions
 ### Pure Function (lit-html)
 ```js
 import { html, render } from 'https://unpkg.com/lit-html';
-import asWebComponent from 'https://unpkg.com/as-web-component/';
+import asWebComponent from 'https://unpkg.com/as-web-component';
 
 function Header(name) {
   return html`
@@ -40,16 +40,16 @@ export default asWebComponent(Header, render);
 ### Async Function (Preact)
 ```js
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/';
+import asWebComponent from 'https://unpkg.com/as-web-component';
 
-async function GeolocationState(name) {
+async function GeolocationState() {
   const result = await navigator.permissions.query({
     name:'geolocation'
   });
 
   return html`
     <span>Geolocation Permission: <strong>${result.state}</strong></span>
-`;
+  `;
 }
 
 export default asWebComponent(GeolocationState, render);
@@ -58,7 +58,7 @@ export default asWebComponent(GeolocationState, render);
 ### Generator function (Preact)
 ```js
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/';
+import asWebComponent from 'https://unpkg.com/as-web-component';
 
 function* Counter() {
   let count = 0;
