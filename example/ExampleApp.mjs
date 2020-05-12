@@ -1,14 +1,18 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
 import asWebComponent from '../src/asWebComponent.mjs';
 
-import Time from './Time.mjs';
-import Counter from './Counter.mjs';
-import PasswordField from './PasswordField.mjs';
+import Header from './components/Header.mjs';
+import GeolocationState from './components/GeolocationState.mjs';
+import Time from './components/Time.mjs';
+import Counter from './components/Counter.mjs';
+import PasswordField from './components/PasswordField.mjs';
 
 function ExampleApp(name) {
   return html`
     <main>
-      <h1>${name}</h1>
+      <${Header} name=${name}/>
+
+      <${GeolocationState} />
 
       <p>Current time is: <${Time} /></p>
 
@@ -16,6 +20,7 @@ function ExampleApp(name) {
 
       <p>
         <form>
+          <label>Password: </label>
           <${PasswordField} show-chars/>
         </form>
       </p>

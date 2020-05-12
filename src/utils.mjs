@@ -8,5 +8,5 @@ export function getAttributes(func) {
 }
 
 export function getName(func) {
-  return `${paramCase(func.name || 'anonymous')}-${shortid().toLowerCase()}`;
+  return `${paramCase(func.name || 'anonymous')}-${shortid().toLowerCase().replace(/[-_]*/, '')}`;
 }
