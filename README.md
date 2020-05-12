@@ -95,6 +95,22 @@ function* Counter() {
 export default asWebComponent(Counter, render);
 ```
 
+### Using a Component
+
+```js
+import SomeComponent from '../SomeComponent.mjs';
+
+// Define a name to reference in HTML
+SomeComponent.define('some-component');
+
+// and/or
+
+// Use auto unique name in Template literal
+import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
+render(html`<${SomeComponent} />`, document.body);
+
+```
+
 # Install
 ```shell
 npm install as-web-component --save

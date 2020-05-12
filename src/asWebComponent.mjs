@@ -17,14 +17,6 @@ export default function asWebComponent(func, renderer) {
       this.generator = null;
     }
 
-    static define(elementName, customElementRegistry = window.customElements) {
-        customElementRegistry.define(elementName, Comp);
-    }
-
-    static get element() {
-      return Comp;
-    }
-
     static get observedAttributes() {
       return attributes;
     }
@@ -70,7 +62,16 @@ export default function asWebComponent(func, renderer) {
     }
   }
 
-  Comp.define(name);
+
+  name.define = (elementName, customElementRegistry = window.customElements) => {
+      customElementRegistry.define(elementName, Comp);
+  }
+
+  name.element = () => {
+    return Comp;
+  }
+
+  name.define(name);
 
   return name;
 }
