@@ -1,5 +1,6 @@
 import { getName, getAttributes } from './utils.mjs';
 import ExportWrapper from './ExportWrapper.mjs';
+import self from './self.mjs';
 
 export default function asWebComponent(func, renderer) {
   const name = getName(func);
@@ -11,10 +12,7 @@ export default function asWebComponent(func, renderer) {
 
       this.attachShadow({ mode: 'open' });
 
-      this.render = render.bind(this);
-      this.invalidate = this.invalidate.bind(this);
-
-      this.func = func.bind(this);
+      this.func = func.bind(self(this, invalidate));
       this.generator = null;
     }
 
@@ -23,20 +21,20 @@ export default function asWebComponent(func, renderer) {
     }
 
     connectedCallback() {
-      this.invalidate();
+      invalidate.call(this);
     }
 
     adoptedCallback() {
-      this.invalidate();
+      invalidate.call(this);
     }
 
     attributeChangedCallback() {
-      this.invalidate();
+      invalidate.call(this);
     }
+  }
 
-    invalidate() {
-      window.requestAnimationFrame(this.render);
-    }
+  function invalidate() {
+    window.requestAnimationFrame(() => render.call(this));
   }
 
   async function render() {
