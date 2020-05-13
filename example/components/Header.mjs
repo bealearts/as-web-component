@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/lit-html'
-import asWebComponent from '../../src/asWebComponent.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 function Header(name) {
   return html`

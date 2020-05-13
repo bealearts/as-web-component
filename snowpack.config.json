@@ -5,7 +5,8 @@
   },
   "devOptions": {
     "port": 3000,
-    "out": "dist"
+    "out": "dist",
+    "fallback": "dev.html"
   },
   "scripts": {
     "mount:example": "mount example --to .",
