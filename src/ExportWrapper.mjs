@@ -7,7 +7,8 @@ export default class ExportWrapper extends String {
   }
 
   define(elementName, customElementRegistry = window.customElements) {
-      customElementRegistry.define(elementName, this.Comp);
+      class Clone extends this.Comp {};
+      customElementRegistry.define(elementName, Clone);
   }
 
   element() {
