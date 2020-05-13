@@ -1,7 +1,7 @@
 import { getName, getAttributes } from './utils.mjs';
 
 export default function asWebComponent(func, renderer) {
-  const name = getName(func);
+  const name = new String(getName(func));
   const attributes = getAttributes(func);
 
   class Comp extends HTMLElement {
@@ -61,7 +61,6 @@ export default function asWebComponent(func, renderer) {
       renderer(iteration.value, this.shadowRoot);
     }
   }
-
 
   name.define = (elementName, customElementRegistry = window.customElements) => {
       customElementRegistry.define(elementName, Comp);

@@ -3,8 +3,12 @@
   <head>
     <meta charset="utf-8">
     <title>as-web-component example</title>
-    <script type="importmap" src="/web_modules/import-map.json"></script>
-    <script type="module" src="./main.mjs"></script>
+    <script
+      defer
+      src="https://unpkg.com/es-module-shims@latest/dist/es-module-shims.js"
+    ></script>
+    <script type="importmap-shim" src="/web_modules/import-map.json"></script>
+    <script type="module-shim" src="./main.mjs"></script>
   </head>
   <body>
   </body>

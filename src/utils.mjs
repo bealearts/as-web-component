@@ -1,6 +1,6 @@
-import funcArgs from '/web_modules/fn-args.js';
-import { paramCase } from "/web_modules/param-case.js";
-import shortid from '/web_modules/shortid.js';
+import funcArgs from 'fn-args';
+import { paramCase } from "param-case";
+import shortid from 'shortid';
 
 export function getAttributes(func) {
   const args = funcArgs(func);
