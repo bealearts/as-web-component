@@ -1,0 +1,15 @@
+{
+  "homepage": "/example",
+  "installOptions": {
+    "sourceMap": true
+  },
+  "devOptions": {
+    "port": 3000,
+    "out": "dist"
+  },
+  "scripts": {
+    "mount:example": "mount example --to .",
+    "mount:web_modules": "mount web_modules",
+    "mount:src": "mount src"
+  }
+}

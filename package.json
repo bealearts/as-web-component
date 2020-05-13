@@ -5,9 +5,10 @@
   "main": "src/asWebComponent.mjs",
   "module": "src/asWebComponent.mjs",
   "scripts": {
-    "prepare": "snowpack",
+    "prepare": "snowpack install",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "browser-sync start --server --watch"
+    "start": "snowpack dev --config snowpack.config.json",
+    "build": "snowpack build --bundle"
   },
   "keywords": [
     "web",
@@ -17,20 +18,15 @@
   ],
   "author": "David Beale",
   "license": "MIT",
-  "dependencies": {
+  "webDependencies": {
     "fn-args": "^5.0.0",
     "param-case": "^3.0.3",
     "shortid": "^2.2.15"
   },
-  "snowpack": {
-    "webDependencies": [
-      "fn-args",
-      "param-case",
-      "shortid"
-    ]
-  },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "snowpack": "^1.7.0"
+    "snowpack": "^2.0.0-beta.19"
+  },
+  "dependencies": {
+    "parcel": "^1.12.4"
   }
 }

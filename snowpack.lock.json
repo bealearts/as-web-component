@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "fn-args": "https://cdn.pika.dev/pin/fn-args@v5.0.0-t7jafQxiTrY0p7HlnRTC/fn-args.js",
+    "param-case": "https://cdn.pika.dev/pin/param-case@v3.0.3-Bey3cuqlxJ3jmaDWyE1U/param-case.js",
+    "shortid": "https://cdn.pika.dev/pin/shortid@v2.2.15-g0X5VchWCNrJoZ44Ahlm/shortid.js"
+  }
+}
