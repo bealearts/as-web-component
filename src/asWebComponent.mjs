@@ -1,7 +1,8 @@
 import { getName, getAttributes } from './utils.mjs';
+import ExportWrapper from './ExportWrapper.mjs';
 
 export default function asWebComponent(func, renderer) {
-  const name = new String(getName(func));
+  const name = getName(func);
   const attributes = getAttributes(func);
 
   class Comp extends HTMLElement {
@@ -62,15 +63,8 @@ export default function asWebComponent(func, renderer) {
     }
   }
 
-  name.define = (elementName, customElementRegistry = window.customElements) => {
-      customElementRegistry.define(elementName, Comp);
-  }
+  const exportWrapper = new ExportWrapper(name, Comp);
+  exportWrapper.define(name);
 
-  name.element = () => {
-    return Comp;
-  }
-
-  name.define(name);
-
-  return name;
+  return exportWrapper;
 }
