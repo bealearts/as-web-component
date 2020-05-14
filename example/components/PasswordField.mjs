@@ -1,4 +1,4 @@
-import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
+import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
 import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 function* PasswordField(showChars = false) {
@@ -7,9 +7,10 @@ function* PasswordField(showChars = false) {
   const input = (event) => {
     password = event.target.value;
     this.invalidate();
-  }
+  };
 
-  while(this.isConnected) {
+  while (this.isConnected) {
+    // eslint-disable-next-line no-param-reassign
     [showChars = false] = yield html`
       <style>
         :host {

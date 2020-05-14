@@ -40,7 +40,7 @@ export default function asWebComponent(func, renderer) {
   async function render() {
     const args = attributes
       .map(attr => {
-        const value =  this.getAttribute(attr);
+        const value = this.getAttribute(attr);
         return value === null ? undefined : value;
       });
 

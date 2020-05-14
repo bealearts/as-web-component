@@ -1,10 +1,10 @@
-import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
+import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
 import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 function* Time() {
   const timer = setInterval(this.invalidate, 1000);
 
-  while(this.isConnected) {
+  while (this.isConnected) {
     yield html`
       <style>
         :host {

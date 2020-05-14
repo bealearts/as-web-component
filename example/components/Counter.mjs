@@ -7,14 +7,14 @@ function* Counter() {
   const inc = () => {
     count++;
     this.invalidate();
-  }
+  };
 
   const dec = () => {
     count--;
     this.invalidate();
-  }
+  };
 
-  while(this.isConnected) {
+  while (this.isConnected) {
     yield html`
       <style>
         :host {

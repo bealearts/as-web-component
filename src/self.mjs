@@ -8,5 +8,5 @@ export default function self(instance, invalidateComponent) {
     invalidate() {
       invalidateComponent.call(instance);
     }
-  }
+  };
 }

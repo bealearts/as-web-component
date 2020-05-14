@@ -3,7 +3,7 @@ import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 async function GeolocationState() {
   const result = await navigator.permissions.query({
-    name:'geolocation'
+    name: 'geolocation'
   });
 
   return html`

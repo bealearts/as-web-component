@@ -1,5 +1,5 @@
 import funcArgs from 'fn-args';
-import { paramCase } from "param-case";
+import { paramCase } from 'param-case';
 import uid from 'uid';
 
 export function getAttributes(func) {
