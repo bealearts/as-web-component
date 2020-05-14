@@ -8,14 +8,14 @@ Web Components from functions
 > * Components from pure functions
 > * Components from Async functions
 > * Stateful components from Generator functions
-> * Render DOM using any library; Preact, lit-html etc
+> * Render DOM using any library; [Preact](https://preactjs.com/), [lit-html](https://lit-html.polymer-project.org/) etc
 > * Global name clash resolution
 > * ESM first
 > * Zero build tools required (for modern browsers)
 
 Interactive [Example](https://raw.githack.com/bealearts/as-web-component/master/example/index.html)
 
-## Usage
+## Basic Usage
 
 ### Pure Function (lit-html)
 ```js
@@ -116,4 +116,9 @@ render(html`<${SomeComponent} />`, document.body);
 # Install
 ```shell
 npm install as-web-component --save
+```
+
+Or, import directly in the browser
+```js
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 ```
