@@ -1,4 +1,4 @@
-# as-web-component
+# as-web-component [![Build Status](https://travis-ci.org/bealearts/as-web-component.png?branch=master)](https://travis-ci.org/bealearts/as-web-component) [![npm version](https://badge.fury.io/js/as-web-component.svg)](http://badge.fury.io/js/as-web-component) [![Dependency Status](https://david-dm.org/bealearts/as-web-component.png)](https://david-dm.org/bealearts/as-web-component)
 
 Web Components from functions
 
