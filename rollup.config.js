@@ -14,6 +14,6 @@ export default {
     resolve(),
     commonjs(),
     nodePolyfills(),
-    terser()
+  //  terser()
   ]
 }

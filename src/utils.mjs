@@ -1,6 +1,6 @@
 import funcArgs from 'fn-args';
 import { paramCase } from "param-case";
-import shortid from 'shortid';
+import uid from 'uid';
 
 export function getAttributes(func) {
   const args = funcArgs(func);
@@ -8,5 +8,5 @@ export function getAttributes(func) {
 }
 
 export function getName(func) {
-  return `${paramCase(func.name || 'anonymous')}-${shortid().toLowerCase().replace(/[-_]*/, '')}`;
+  return `${paramCase(func.name || 'anonymous')}-${uid().toLowerCase()}`;
 }
