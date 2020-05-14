@@ -7,7 +7,7 @@ Web Components from functions
 >  Supports;
 > * Components from pure functions
 > * Components from Async functions
-> * Statefull components from Generator functions
+> * Stateful components from Generator functions
 > * Render DOM using any library; Preact, lit-html etc
 > * Global name clash resolution
 > * ESM first
