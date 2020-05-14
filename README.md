@@ -13,6 +13,8 @@ Web Components from functions
 > * ESM first
 > * Zero build tools required (for modern browsers)
 
+Interactive [Example](https://raw.githack.com/bealearts/as-web-component/master/example/index.html)
+
 ## Usage
 
 ### Pure Function (lit-html)
