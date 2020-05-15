@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+- 12
+deploy:
+  provider: npm
+  email: david.beale@bealearts.co.uk
+  api_key:
+    secure: hwLI/+wzpta07Mp6VglW4PspOwT/s8k7idAi+sTBkrcckZhmKDWHqx1Qw19WNnqr9mjdukIJSctVpvyngaF7b+L7UaGEvFJgM1JDMfNOn/gvRMUmRbT7QoEb141PD2KlM4eCvVYHEdbQB3zzicshheDhOr3m7yBBDF/tqFd42+aL4KOWkRn60egMysLiv2Ew9RTig/Go65OHNTcKnJtjm4y6Z3GaQx3m3yb4OUIpJA8e5IRZTDr5Iyv+lavYNpOMGIlLuzYIbkM8xGkTSp79hSC6/7JYK6P/D+DKNeVnvdCg7XJpA5D/e7rJkFPgoHfn5X5PXFS19yhYkxBCmeUlepcx44yEedmJ4jsfMK3ESTb+MS02CfjLOVPsOvctmGHgx1BYLPUDuvx1w7OhmSJB4l+IrGFh7P/f3wiYWHsMSkopL6ocP+kSLn+ITv6JYh8JGmHe/mWCSsiE1YQbvHTI/k0+/gCxYXcru28wTFrb9WHvGWf84n5AcGowo8HvZxeBIzi/n2cR9QhW+nO3tunGHhGsBS8wTJdaDrwtg+dbvXbPJ52y33Sps3+7FEiFNjzeFgjIUrKraRQuNqKtNt2aqId2E3DLJJ/9vnjnL2g1fM4Mw63U7OgzEuSP/Z4xZmgJlJdAMugbKjng6vOeHgrXez3YjUlHeQxstBBIyIoiuNI=
+  on:
+    all_branches: true
+    tags: true
+    repo: bealearts/as-web-component
