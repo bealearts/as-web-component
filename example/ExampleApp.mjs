@@ -21,7 +21,7 @@ function ExampleApp(name) {
       <p>
         <form>
           <label>Password: </label>
-          <${PasswordField} show-chars/>
+          <${PasswordField} show-chars=${true}/>
         </form>
       </p>
     </main>

@@ -22,7 +22,7 @@ export default function asWebComponent(func, renderer) {
     }
 
     static get observedAttributes() {
-      return Array.from(attributes.values());
+      return Array.from(attributes.keys());
     }
 
     connectedCallback() {
