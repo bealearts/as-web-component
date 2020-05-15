@@ -8,5 +8,5 @@ export function getAttributes(func) {
 }
 
 export function getName(func) {
-  return `${paramCase(func.name || 'anonymous')}-${uid().toLowerCase()}`;
+  return `${paramCase(func.name || 'anonymous')}-${uid(5).toLowerCase()}`;
 }

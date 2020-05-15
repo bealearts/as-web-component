@@ -3,15 +3,11 @@ export default class ExportWrapper extends String {
   constructor(name, Comp) {
     super(name);
 
-    this.Comp = Comp;
+    this.element = Comp;
   }
 
   define(elementName, customElementRegistry = window.customElements) {
-    class Clone extends this.Comp {}
+    class Clone extends this.element {}
     customElementRegistry.define(elementName, Clone);
-  }
-
-  element() {
-    return this.Comp;
   }
 }
