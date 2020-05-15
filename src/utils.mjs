@@ -4,9 +4,37 @@ import uid from 'uid';
 
 export function getAttributes(func) {
   const args = funcArgs(func);
-  return args.map(arg => paramCase(arg));
+  return new Map(args.map(arg =>
+    [paramCase(arg), arg]
+  ));
 }
 
 export function getName(func) {
   return `${paramCase(func.name || 'anonymous')}-${uid(5).toLowerCase()}`;
+}
+
+export function getArgumentValues(instance, attributes) {
+  const args = Object.fromEntries(
+    Array.from(attributes.entries())
+      .map(([attr, arg]) => {
+        let value = instance.getAttribute(attr);
+        value = value === null ? undefined : value;
+        return [arg, value]
+      })
+  );
+
+  return args;
+}
+
+export function getFieldValues(instance, attributes) {
+  const fields = Object.fromEntries(
+    Array.from(attributes.entries())
+      .map(([attr, arg]) => {
+        let value = instance[arg];
+        value === null ? undefined : value;
+        return [arg, value]
+      })
+  );
+
+  return fields;
 }

@@ -1,4 +1,4 @@
-import { getName, getAttributes } from './utils.mjs';
+import { getName, getAttributes, getArgumentValues, getFieldValues } from './utils.mjs';
 import ExportWrapper from './ExportWrapper.mjs';
 import self from './self.mjs';
 
@@ -6,21 +6,32 @@ export default function asWebComponent(func, renderer) {
   const name = getName(func);
   const attributes = getAttributes(func);
 
+  const privateProps = new WeakMap();
+  const privateField = new WeakMap();
+
   class Comp extends HTMLElement {
     constructor() {
       super();
+      privateProps.set(this, {});
+      privateField.set(this, {});
 
       this.attachShadow({ mode: 'open' });
 
-      this.func = func.bind(self(this, invalidate));
-      this.generator = null;
+      privateProps.get(this).func = func.bind(self(this, invalidate));
+      privateProps.get(this).generator = null;
     }
 
     static get observedAttributes() {
-      return attributes;
+      return Array.from(attributes.values());
     }
 
     connectedCallback() {
+      const args = getArgumentValues(this, attributes);
+
+      Object.entries(args).forEach(([arg, value]) => {
+        if (value) this[arg] = value;
+      });
+
       invalidate.call(this);
     }
 
@@ -28,8 +39,9 @@ export default function asWebComponent(func, renderer) {
       invalidate.call(this);
     }
 
-    attributeChangedCallback() {
-      invalidate.call(this);
+    attributeChangedCallback(attr, oldValue, newValue) {
+      const arg = attributes.get(attr);
+      this[arg] = newValue;
     }
   }
 
@@ -38,28 +50,42 @@ export default function asWebComponent(func, renderer) {
   }
 
   async function render() {
-    const args = attributes
-      .map(attr => {
-        const value = this.getAttribute(attr);
-        return value === null ? undefined : value;
-      });
+    const fields = getFieldValues(this, attributes);
 
-    if (!this.generator) {
-      const result = this.func(...args);
+    const func = privateProps.get(this).func;
+    let generator = privateProps.get(this).generator;
+
+    if (!generator) {
+      const result = func(...Object.values(fields));
       if (!result.next) {
         const content = await result;
         renderer(content, this.shadowRoot);
       } else {
-        this.generator = result;
+        privateProps.get(this).generator = result;
       }
     }
 
-    if (this.generator) {
-      const iteration = await this.generator.next(args);
+    generator = privateProps.get(this).generator;
+    if (generator) {
+      const iteration = await generator.next(fields);
       if (iteration.done) return;
       renderer(iteration.value, this.shadowRoot);
     }
   }
+
+  attributes.forEach((arg, attr) => {
+    Object.defineProperty(Comp.prototype, arg, {
+      get() {
+        return privateField.get(this)[arg];
+      },
+      set(value) {
+        if (privateField.get(this)[arg] !== value) {
+          privateField.get(this)[arg] = value;
+          invalidate.call(this);
+        }
+      }
+    })
+  });
 
   const exportWrapper = new ExportWrapper(name, Comp);
   exportWrapper.define(name);
