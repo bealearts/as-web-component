@@ -1,4 +1,4 @@
-import { getName, getAttributes, getArgumentValues, getFieldValues } from './utils.mjs';
+import { getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps } from './utils.mjs';
 import ExportWrapper from './ExportWrapper.mjs';
 import self from './self.mjs';
 
@@ -7,13 +7,13 @@ export default function asWebComponent(func, renderer) {
   const attributes = getAttributes(func);
 
   const privateProps = new WeakMap();
-  const privateField = new WeakMap();
+  const privateFields = new WeakMap();
 
   class Comp extends HTMLElement {
     constructor() {
       super();
       privateProps.set(this, {});
-      privateField.set(this, {});
+      privateFields.set(this, {});
 
       this.attachShadow({ mode: 'open' });
 
@@ -73,19 +73,7 @@ export default function asWebComponent(func, renderer) {
     }
   }
 
-  attributes.forEach((arg, attr) => {
-    Object.defineProperty(Comp.prototype, arg, {
-      get() {
-        return privateField.get(this)[arg];
-      },
-      set(value) {
-        if (privateField.get(this)[arg] !== value) {
-          privateField.get(this)[arg] = value;
-          invalidate.call(this);
-        }
-      }
-    })
-  });
+  decorateWithProps(Comp, attributes, privateFields, invalidate);
 
   const exportWrapper = new ExportWrapper(name, Comp);
   exportWrapper.define(name);
