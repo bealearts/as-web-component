@@ -11,7 +11,7 @@ function* PasswordField(showChars = false) {
 
   while (this.isConnected) {
     // eslint-disable-next-line no-param-reassign
-    ({showChars = false} = yield html`
+    ({ showChars = false } = yield html`
       <style>
         :host {
           display: inline-flex;

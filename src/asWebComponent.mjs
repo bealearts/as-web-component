@@ -1,4 +1,6 @@
-import { getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps } from './utils.mjs';
+import {
+  getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps
+} from './utils.mjs';
 import ExportWrapper from './ExportWrapper.mjs';
 import self from './self.mjs';
 
@@ -17,7 +19,7 @@ export default function asWebComponent(func, renderer) {
 
       this.attachShadow({ mode: 'open' });
 
-      privateProps.get(this).func = func.bind(self(this, invalidate));
+      privateProps.get(this).componentFunc = func.bind(self(this, invalidate));
       privateProps.get(this).generator = null;
     }
 
@@ -52,11 +54,11 @@ export default function asWebComponent(func, renderer) {
   async function render() {
     const fields = getFieldValues(this, attributes);
 
-    const func = privateProps.get(this).func;
-    let generator = privateProps.get(this).generator;
+    const { componentFunc } = privateProps.get(this);
+    let { generator } = privateProps.get(this);
 
     if (!generator) {
-      const result = func(...Object.values(fields));
+      const result = componentFunc(...Object.values(fields));
       if (!result.next) {
         const content = await result;
         renderer(content, this.shadowRoot);
