@@ -38,14 +38,16 @@ export function getFieldValues(instance, attributes) {
 }
 
 export function decorateWithProps(Comp, attributes, privateFields, invalidate) {
-  attributes.forEach((arg) => {
+  attributes.forEach((arg, attr) => {
     Object.defineProperty(Comp.prototype, arg, {
       get() {
         return privateFields.get(this)[arg];
       },
       set(value) {
-        if (privateFields.get(this)[arg] !== value) {
-          privateFields.get(this)[arg] = value; // eslint-disable-line no-param-reassign
+        const val = value === '' ? this.hasAttribute(attr) : value;
+
+        if (privateFields.get(this)[arg] !== val) {
+          privateFields.get(this)[arg] = val; // eslint-disable-line no-param-reassign
           invalidate.call(this);
         }
       }
