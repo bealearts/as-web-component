@@ -8,7 +8,11 @@ export function getAttributes(func) {
 }
 
 export function getName(func) {
-  return `${paramCase(func.name || 'anonymous')}-${uid(5).toLowerCase()}`;
+  return paramCase(func.name) || 'anonymous';
+}
+
+export function getUniqueName(func) {
+  return `${getName(func)}-${uid(5).toLowerCase()}`;
 }
 
 export function getArgumentValues(instance, attributes) {
@@ -38,16 +42,14 @@ export function getFieldValues(instance, attributes) {
 }
 
 export function decorateWithProps(Comp, attributes, privateFields, invalidate) {
-  attributes.forEach((arg, attr) => {
+  attributes.forEach((arg) => {
     Object.defineProperty(Comp.prototype, arg, {
       get() {
         return privateFields.get(this)[arg];
       },
       set(value) {
-        const val = value === '' ? this.hasAttribute(attr) : value;
-
-        if (privateFields.get(this)[arg] !== val) {
-          privateFields.get(this)[arg] = val; // eslint-disable-line no-param-reassign
+        if (privateFields.get(this)[arg] !== value) {
+          privateFields.get(this)[arg] = value; // eslint-disable-line no-param-reassign
           invalidate.call(this);
         }
       }

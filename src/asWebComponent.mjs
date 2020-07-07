@@ -1,11 +1,12 @@
 import {
-  getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps
+  getUniqueName, getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps
 } from './utils.mjs';
 import ExportWrapper from './ExportWrapper.mjs';
 import self from './self.mjs';
 
 export default function asWebComponent(func, renderer) {
-  const name = getName(func);
+  const component = getName(func);
+  const name = getUniqueName(func);
   const attributes = getAttributes(func);
 
   const privateProps = new WeakMap();
@@ -28,6 +29,8 @@ export default function asWebComponent(func, renderer) {
     }
 
     connectedCallback() {
+      this.setAttribute('data-component', component);
+
       const args = getArgumentValues(this, attributes);
 
       Object.entries(args).forEach(([arg, value]) => {

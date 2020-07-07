@@ -12,6 +12,7 @@ Web Components from functions
 > * Global name clash resolution
 > * ESM first
 > * Zero build tools required (for modern browsers)
+> * Easy DOM testing using data-component attribute
 
 Interactive [Example](https://raw.githack.com/bealearts/as-web-component/master/example/index.html)
 
