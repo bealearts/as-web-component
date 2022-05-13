@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { isConnected, invalidate } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 import Header from './components/Header.mjs';
 import GeolocationState from './components/GeolocationState.mjs';
@@ -8,20 +8,18 @@ import Counter from './components/Counter.mjs';
 import PasswordField from './components/PasswordField.mjs';
 import Dialog from './components/Dialog.mjs';
 
-function* ExampleApp(name) {
-  let dialogOpen = false;
+async function* ExampleApp(name) {
+  this.dialogOpen = false;
 
   const openDialog = () => {
-    dialogOpen = true;
-    invalidate(this);
+    this.dialogOpen = true;
   };
 
   const closeDialog = () => {
-    dialogOpen = false;
-    invalidate(this);
+    this.dialogOpen = false;
   };
 
-  while (isConnected(this)) {
+  for await (const _ of this) {
     yield html`
       <main>
         <${Header} name=${name}/>
@@ -40,8 +38,8 @@ function* ExampleApp(name) {
         </p>
 
         <p>
-          <button disabled=${dialogOpen} onClick=${openDialog}>Show Dialog</button>
-          <${Dialog} open=${dialogOpen} onClose=${closeDialog} />
+          <button disabled=${this.dialogOpen} onClick=${openDialog}>Show Dialog</button>
+          <${Dialog} open=${this.dialogOpen} onClose=${closeDialog} />
         </p>
       </main>
   `;

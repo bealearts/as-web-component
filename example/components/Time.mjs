@@ -1,8 +1,14 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { isConnected } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 async function* Time() {
-  while (isConnected(this)) {
+  this.now = now();
+
+  const timer = setInterval(() => {
+    this.now = now();
+  }, 1000);
+
+  for await (const _ of this) {
     yield html`
       <style>
         :host {
@@ -10,18 +16,15 @@ async function* Time() {
         }
       </style>
 
-      <span>${now()}</span>
+      <span>${this.now}</span>
     `;
-    await delay(1000); // eslint-disable-line no-await-in-loop
   }
+
+  clearInterval(timer);
 }
 
 export default asWebComponent(Time, render);
 
 function now() {
   return (new Date()).toLocaleTimeString();
-}
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }

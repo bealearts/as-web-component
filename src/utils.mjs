@@ -41,7 +41,7 @@ export function getFieldValues(instance, attributes) {
   return fields;
 }
 
-export function decorateWithProps(Comp, attributes, privateFields, invalidate) {
+export function decorateWithProps(Comp, attributes, privateFields, privateProps) {
   attributes.forEach((arg) => {
     Object.defineProperty(Comp.prototype, arg, {
       get() {
@@ -50,7 +50,7 @@ export function decorateWithProps(Comp, attributes, privateFields, invalidate) {
       set(value) {
         if (privateFields.get(this)[arg] !== value) {
           privateFields.get(this)[arg] = value; // eslint-disable-line no-param-reassign
-          invalidate.call(this);
+          privateProps.get(this).self[$invalidate]();
         }
       }
     });

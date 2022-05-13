@@ -22,8 +22,8 @@ export default function asWebComponent(func, renderer) {
 
       this.attachShadow({ mode: 'open' });
 
-      privateProps.get(this).componentFunc = func.bind(self(this, invalidate));
-      privateProps.get(this).generator = null;
+      privateProps.get(this).self = self(this, attributes);
+      privateProps.get(this).componentFunc = func.bind(privateProps.get(this).self);
     }
 
     static get observedAttributes() {
@@ -39,12 +39,12 @@ export default function asWebComponent(func, renderer) {
         if (value) this[arg] = value;
       });
 
-      invalidate.call(this);
+      renderLoop.call(this);
     }
-
-    adoptedCallback() {
-      invalidate.call(this);
-    }
+    //
+    // adoptedCallback() {
+    //   invalidate.call(this);
+    // }
 
     attributeChangedCallback(attr, oldValue, newValue) {
       const arg = attributes.get(attr);
@@ -52,36 +52,27 @@ export default function asWebComponent(func, renderer) {
     }
   }
 
-  function invalidate() {
-    window.requestAnimationFrame(() => render.call(this));
-  }
-
-  async function render() {
+  async function renderLoop() {
     const fields = getFieldValues(this, attributes);
-
     const { componentFunc } = privateProps.get(this);
-    let { iterator } = privateProps.get(this);
 
-    if (!iterator) {
-      const result = await componentFunc(...Object.values(fields));
-      if (!result.next) {
-        const content = await result;
-        renderer(content, this.shadowRoot);
-      } else {
-        privateProps.get(this).iterator = result;
-      }
+    const result = await componentFunc(...Object.values(fields));
+
+    if (!result.next) {
+      const content = await result;
+      renderer(content, this.shadowRoot);
+      return;
     }
 
-    iterator = privateProps.get(this).iterator;
-    if (iterator) {
-      const iteration = await iterator.next(fields);
-      if (iteration.done) return;
+    const iterator = result;
+    while (true) {
+      const iteration = await iterator.next();
+      if (iteration.done) break;
       renderer(iteration.value, this.shadowRoot);
-      invalidate.call(this);
     }
   }
 
-  decorateWithProps(Comp, attributes, privateFields, invalidate);
+  decorateWithProps(Comp, attributes, privateFields, privateProps);
 
   const exportWrapper = new ExportWrapper(name, Comp);
   exportWrapper.define(name);

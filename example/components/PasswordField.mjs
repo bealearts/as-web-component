@@ -1,25 +1,24 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { isConnected, invalidate } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
-function* PasswordField(showChars = false) {
-  let password = '';
+async function* PasswordField(showChars) {
+  this.password = '';
 
   const input = (event) => {
-    password = event.target.value;
-    invalidate(this);
+    this.password = event.target.value;
   };
 
-  while (isConnected(this)) {
-    // eslint-disable-next-line no-param-reassign
-    ({ showChars = false } = yield html`
+  // eslint-disable-next-line no-param-reassign
+  for await ({ showChars } of this) {
+    yield html`
       <style>
         :host {
           display: inline-flex;
         }
       </style>
 
-      <input type="${showChars ? 'text' : 'password'}" value="${password}" onInput=${input} />
-  `);
+      <input type="${showChars ? 'text' : 'password'}" value="${this.password}" onInput=${input} />
+    `;
   }
 }
 

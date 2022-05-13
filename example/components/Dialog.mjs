@@ -1,14 +1,14 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { isConnected, dispatchEvent } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent, { dispatchEvent } from 'https://unpkg.com/as-web-component/standalone.mjs';
 
-function* Dialog(open) {
+async function* Dialog(open) {
   const close = () => {
     dispatchEvent(this, new Event('close'));
   };
 
-  while (isConnected(this)) {
-    // eslint-disable-next-line no-param-reassign
-    ({ open } = yield html`
+  // eslint-disable-next-line no-param-reassign
+  for await ({ open } of this) {
+    yield html`
       <style>
           dialog {
             min-width: 300px;
@@ -33,7 +33,7 @@ function* Dialog(open) {
         </header>
         <section>Hello World!</section>
       </dialog>
-  `);
+    `;
   }
 }
 

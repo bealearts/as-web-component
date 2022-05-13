@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { isConnected } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 async function* Counter() {
   this.count = 0;

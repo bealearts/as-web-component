@@ -1,6 +1,6 @@
-import { $instance, $invalidate } from './utils.mjs';
+import { $instance, $invalidate, getFieldValues } from './utils.mjs';
 
-export default function self(instance, invalidate) {
+export default function self(instance, attributes) {
   let resolver;
   let pending = new Promise(resolve => {
     resolver = resolve;
@@ -8,9 +8,11 @@ export default function self(instance, invalidate) {
 
   const base = {
     [$instance]: instance,
-    [$invalidate]: invalidate,
+    [$invalidate]() {
+      const fields = getFieldValues(instance, attributes);
+      window.requestAnimationFrame(() => resolver(fields));
+    },
     async* [Symbol.asyncIterator]() {
-      yield;
       while (true) {
         yield await pending; // eslint-disable-line no-await-in-loop
         pending = new Promise(resolve => { // eslint-disable-line no-loop-func
@@ -36,7 +38,7 @@ export default function self(instance, invalidate) {
       }
 
       state[prop] = value;
-      resolver();
+      target[$invalidate].call(target[$instance]);
 
       return true;
     }
