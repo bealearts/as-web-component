@@ -1,20 +1,18 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { invalidate, isConnected } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent, { isConnected } from 'https://unpkg.com/as-web-component/standalone.mjs';
 
-function* Counter() {
-  let count = 0;
+async function* Counter() {
+  this.count = 0;
 
   const inc = () => {
-    count++;
-    invalidate(this);
+    this.count++;
   };
 
   const dec = () => {
-    count--;
-    invalidate(this);
+    this.count--;
   };
 
-  while (isConnected(this)) {
+  for await (const _ of this) {
     yield html`
       <style>
         :host {
@@ -27,7 +25,7 @@ function* Counter() {
       </style>
 
       <button onClick=${dec}>-</button>
-      <span>${count}</span>
+      <span>${this.count}</span>
       <button onClick=${inc}>+</button>
   `;
   }
