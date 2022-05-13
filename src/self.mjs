@@ -1,13 +1,9 @@
+import { $instance, $invalidate } from './utils.mjs';
 
-export default function self(instance, invalidateComponent) {
+export default function self(instance, invalidate) {
   return {
-    get isConnected() {
-      return instance.isConnected;
-    },
-
-    invalidate() {
-      invalidateComponent.call(instance);
-    },
+    [$instance]: instance,
+    [$invalidate]: invalidate,
 
     dispatchEvent(...args) {
       return instance.dispatchEvent.call(instance, ...args);

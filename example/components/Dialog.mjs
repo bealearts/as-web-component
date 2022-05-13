@@ -1,12 +1,12 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent, { isConnected } from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 function* Dialog(open) {
   const close = () => {
     this.dispatchEvent(new Event('close'));
   };
 
-  while (this.isConnected) {
+  while (isConnected(this)) {
     // eslint-disable-next-line no-param-reassign
     ({ open } = yield html`
       <style>

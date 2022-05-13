@@ -10,6 +10,7 @@
     "no-prototype-builtins": ["off"],
     "no-plusplus": ["off"],
     "arrow-parens": ["off"],
+    "no-restricted-syntax": ["off"],
     "import/extensions": ["off"],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.*js", "**/*.spec.*js"]}],
     "import/no-unresolved": ["error", { ignore: ['^https:\/\/'] }]

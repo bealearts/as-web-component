@@ -4,6 +4,8 @@ import {
 import ExportWrapper from './ExportWrapper.mjs';
 import self from './self.mjs';
 
+export * from './exports.mjs';
+
 export default function asWebComponent(func, renderer) {
   const component = getName(func);
   const name = getUniqueName(func);
@@ -58,23 +60,24 @@ export default function asWebComponent(func, renderer) {
     const fields = getFieldValues(this, attributes);
 
     const { componentFunc } = privateProps.get(this);
-    let { generator } = privateProps.get(this);
+    let { iterator } = privateProps.get(this);
 
-    if (!generator) {
-      const result = componentFunc(...Object.values(fields));
+    if (!iterator) {
+      const result = await componentFunc(...Object.values(fields));
       if (!result.next) {
         const content = await result;
         renderer(content, this.shadowRoot);
       } else {
-        privateProps.get(this).generator = result;
+        privateProps.get(this).iterator = result;
       }
     }
 
-    generator = privateProps.get(this).generator;
-    if (generator) {
-      const iteration = await generator.next(fields);
+    iterator = privateProps.get(this).iterator;
+    if (iterator) {
+      const iteration = await iterator.next(fields);
       if (iteration.done) return;
       renderer(iteration.value, this.shadowRoot);
+      invalidate.call(this);
     }
   }
 

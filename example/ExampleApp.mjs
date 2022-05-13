@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent, { isConnected, invalidate } from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 import Header from './components/Header.mjs';
 import GeolocationState from './components/GeolocationState.mjs';
@@ -13,15 +13,15 @@ function* ExampleApp(name) {
 
   const openDialog = () => {
     dialogOpen = true;
-    this.invalidate();
+    invalidate(this);
   };
 
   const closeDialog = () => {
     dialogOpen = false;
-    this.invalidate();
+    invalidate(this);
   };
 
-  while (this.isConnected) {
+  while (isConnected(this)) {
     yield html`
       <main>
         <${Header} name=${name}/>

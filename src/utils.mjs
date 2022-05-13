@@ -56,3 +56,15 @@ export function decorateWithProps(Comp, attributes, privateFields, invalidate) {
     });
   });
 }
+
+export const $instance = Symbol('instance');
+
+export function getInstance(self) {
+  return self[$instance];
+}
+
+export const $invalidate = Symbol('$invalidate');
+
+export function getInvalidate(self) {
+  return self[$invalidate];
+}
