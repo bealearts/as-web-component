@@ -7,7 +7,7 @@ Web Components from functions
 >  Supports;
 > * Components from pure functions
 > * Components from Async functions
-> * Stateful components from Generator functions
+> * Stateful components from Async Generator functions
 > * Render DOM using any library; [Preact](https://preactjs.com/), [lit-html](https://lit-html.polymer-project.org/) etc
 > * Global name clash resolution
 > * ESM first
@@ -58,25 +58,23 @@ async function GeolocationState() {
 export default asWebComponent(GeolocationState, render);
 ```
 
-### Generator function (Preact)
+### Async Generator function (Preact)
 ```js
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
 import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
-function* Counter() {
-  let count = 0;
+async function* Counter() {
+  this.count = 0;
 
   const inc = () => {
-    count++;
-    this.invalidate();
+    this.count++;
   }
 
   const dec = () => {
-    count--;
-    this.invalidate();
+    this.count--;
   }
 
-  while(this.isConnected) {
+  for await (_ of this) {
     yield html`
       <style>
         :host {
@@ -89,7 +87,7 @@ function* Counter() {
       </style>
 
       <button onClick=${dec}>-</button>
-      <span>${count}</span>
+      <span>${this.count}</span>
       <button onClick=${inc}>+</button>
   `;
   }

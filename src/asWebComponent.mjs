@@ -65,8 +65,8 @@ export default function asWebComponent(func, renderer) {
     }
 
     const iterator = result;
-    while (true) {
-      const iteration = await iterator.next();
+    while (true) { // eslint-disable-line no-constant-condition
+      const iteration = await iterator.next(); // eslint-disable-line no-await-in-loop
       if (iteration.done) break;
       renderer(iteration.value, this.shadowRoot);
     }
