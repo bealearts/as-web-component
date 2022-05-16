@@ -7,8 +7,8 @@ Web Components from functions
 >  Supports;
 > * Components from pure functions
 > * Components from Async functions
-> * Stateful components from Async Generator functions
-> * Render DOM using any library; [Preact](https://preactjs.com/), [lit-html](https://lit-html.polymer-project.org/) etc
+> * Stateful/Lifecycle components from Async Generator functions
+> * Render DOM using any library; [Preact](https://preactjs.com/), [lit-html](https://lit-html.polymer-project.org/) etc, with or without [JSX](https://reactjs.org/docs/introducing-jsx.html)
 > * Global name clash resolution
 > * ESM first
 > * Zero build tools required (for modern browsers)

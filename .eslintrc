@@ -6,11 +6,11 @@
   "rules": {
     "comma-dangle": ["error", "never"],
     "no-use-before-define": ["off"],
-    "no-unused-vars": ["warn"],
     "no-prototype-builtins": ["off"],
     "no-plusplus": ["off"],
     "arrow-parens": ["off"],
     "no-restricted-syntax": ["off"],
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_$" }],
     "import/extensions": ["off"],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.*js", "**/*.spec.*js"]}],
     "import/no-unresolved": ["error", { ignore: ['^https:\/\/'] }]
