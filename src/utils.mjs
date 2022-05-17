@@ -11,8 +11,11 @@ export function getName(func) {
   return paramCase(func.name) || 'anonymous';
 }
 
-export function getUniqueName(func) {
-  return `${getName(func)}-${uid(5).toLowerCase()}`;
+export function getUniqueName(name) {
+  if (name.includes('-') && !window.customElements.get(name)) {
+    return name;
+  }
+  return `${name}-${uid(5).toLowerCase()}`;
 }
 
 export function getArgumentValues(instance, attributes) {

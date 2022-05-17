@@ -98,16 +98,23 @@ export default asWebComponent(Counter, render);
 
 ### Using a Component
 
+#### Reference from static HTML
+
 ```js
 import SomeComponent from '../SomeComponent.mjs';
 
-// Define a name to reference in HTML
-SomeComponent.define('some-component');
+// Reference as <some-component></some-component> in HTML
+// Note: If the name does not contain a "-" or is already taken, then a "-{UID}" will be added to the name
 
-// and/or
+// or, optionally define a name to reference in HTML, must contain a "_" and be unique in the page
+SomeComponent.define('another-name');
+```
 
-// Use auto unique name in Template literal
+#### Use auto unique name in a renderer
+```js
+import SomeComponent from '../SomeComponent.mjs';
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
+
 render(html`<${SomeComponent} />`, document.body);
 
 ```

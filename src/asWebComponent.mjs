@@ -8,7 +8,7 @@ export * from './exports.mjs';
 
 export default function asWebComponent(func, renderer) {
   const component = getName(func);
-  const name = getUniqueName(func);
+  const name = getUniqueName(component);
   const attributes = getAttributes(func);
 
   const privateProps = new WeakMap();
