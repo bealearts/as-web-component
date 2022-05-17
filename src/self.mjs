@@ -13,7 +13,7 @@ export default function self(instance, attributes) {
       window.requestAnimationFrame(() => resolver(fields));
     },
     async* [Symbol.asyncIterator]() {
-      while (true) {
+      while (instance.isConnected) {
         yield await pending; // eslint-disable-line no-await-in-loop
         pending = new Promise(resolve => { // eslint-disable-line no-loop-func
           resolver = resolve;
