@@ -1,6 +1,6 @@
 import funcArgs from 'fn-args';
 import { paramCase } from 'param-case';
-import uid from 'uid';
+import { uid } from 'uid';
 
 export function getAttributes(func) {
   const args = funcArgs(func);

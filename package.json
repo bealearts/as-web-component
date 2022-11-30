@@ -19,9 +19,9 @@
   "author": "David Beale",
   "license": "MIT",
   "dependencies": {
-    "fn-args": "^5.0.0",
+    "fn-args": "^6.0.0",
     "param-case": "^3.0.3",
-    "uid": "^1.0.0"
+    "uid": "^2.0.1"
   },
   "devDependencies": {
     "esbuild": "^0.15.16",
