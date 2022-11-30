@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from '../..';
 
 async function* PasswordField(showChars) {
   this.password = '';

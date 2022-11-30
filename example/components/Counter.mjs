@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from '../..';
 
 async function* Counter() {
   this.count = 0;
@@ -12,8 +12,7 @@ async function* Counter() {
     this.count--;
   };
 
-  for await (const obj of this) {
-    console.log(obj.count, this.count);
+  for await (const { count } of this) {
     yield html`
       <style>
         :host {
@@ -26,7 +25,7 @@ async function* Counter() {
       </style>
 
       <button onClick=${dec}>-</button>
-      <span>${obj.count}</span>
+      <span>${count}</span>
       <button onClick=${inc}>+</button>
   `;
   }

@@ -1,8 +1,12 @@
 {
   "env": {
-    "browser": true
+    "browser": true,
+    "es2022": true
   },
-  "extends": "airbnb-base",
+  "extends": "airbnb",
+  "parserOptions": {
+    "ecmaVersion": 2022
+   },
   "rules": {
     "comma-dangle": ["error", "never"],
     "no-use-before-define": ["off"],
@@ -12,7 +16,7 @@
     "no-restricted-syntax": ["off"],
     "no-unused-vars": ["warn", { "varsIgnorePattern": "^_$" }],
     "import/extensions": ["off"],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.*js", "**/*.spec.*js"]}],
-    "import/no-unresolved": ["error", { ignore: ['^https:\/\/'] }]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js*", "example/**/*.js*"]}],
+    "react/react-in-jsx-scope": ["off"]
   }
 }

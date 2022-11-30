@@ -22,24 +22,17 @@ export default function self(instance, attributes) {
           resolver = resolve;
         });
       }
-    },
-    count: 0
+    }
   };
 
-  const state = {};
   return new Proxy(base, {
     get(target, prop, receiver) {
       if (prop in target) {
         return Reflect.get(target, prop, receiver);
       }
-      return state[prop];
     },
 
     set(target, prop, value) {
-      // if (prop in base) {
-      //   throw new TypeError(`${prop} is a reserved property`);
-      // }
-
       target[prop] = value;
       target[$invalidate].call(target);
 

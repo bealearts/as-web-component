@@ -1,5 +1,5 @@
 import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent, { dispatchEvent } from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent, { dispatchEvent } from '../..';
 
 async function* Dialog(open) {
   const close = () => {
