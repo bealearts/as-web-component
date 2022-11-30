@@ -1,9 +1,9 @@
-import { h, render } from 'preact';
+import { render } from 'preact';
 import asWebComponent from '../..';
 
 function Header(name) {
   return (
-    <header>
+    <>
       <style>
         {`
           h1 {
@@ -11,8 +11,10 @@ function Header(name) {
           }
         `}
       </style>
-      <h1>{name}</h1>
-    </header>
+      <header>
+        <h1>{name}</h1>
+      </header>
+    </>
   );
 }
 

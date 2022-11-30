@@ -1,4 +1,4 @@
-import { getInstance, getInvalidate } from './utils.mjs';
+import { getInstance, getInvalidate } from './utils.js';
 
 export function isConnected(selfInstance) {
   return getInstance(selfInstance).isConnected;

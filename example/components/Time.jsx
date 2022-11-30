@@ -1,4 +1,4 @@
-import { h, render, Fragment } from 'preact';
+import { render } from 'preact';
 import asWebComponent from '../..';
 
 async function* Time() {
@@ -10,7 +10,7 @@ async function* Time() {
 
   for await (const { ts } of this) {
     yield (
-      <Fragment>
+      <>
         <style>
           {`
             :host {
@@ -20,7 +20,7 @@ async function* Time() {
         </style>
 
         <span>{ts}</span>
-      </Fragment>
+      </>
     );
   }
 

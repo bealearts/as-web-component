@@ -1,10 +1,10 @@
 import {
   getUniqueName, getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps
-} from './utils.mjs';
-import ExportWrapper from './ExportWrapper.mjs';
-import self from './self.mjs';
+} from './utils.js';
+import ExportWrapper from './ExportWrapper.js';
+import self from './self.js';
 
-export * from './exports.mjs';
+export * from './exports.js';
 
 export default function asWebComponent(func, renderer) {
   const component = getName(func);

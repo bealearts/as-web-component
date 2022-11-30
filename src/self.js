@@ -1,4 +1,4 @@
-import { $instance, $invalidate, getFieldValues } from './utils.mjs';
+import { $instance, $invalidate, getFieldValues } from './utils.js';
 
 export default function self(instance, attributes) {
   let resolver;

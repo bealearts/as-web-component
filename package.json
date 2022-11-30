@@ -2,11 +2,11 @@
   "name": "as-web-component",
   "version": "0.3.0",
   "description": "Web Components from functions",
-  "main": "src/asWebComponent.mjs",
-  "module": "src/asWebComponent.mjs",
+  "main": "src/asWebComponent.js",
+  "module": "src/asWebComponent.js",
   "scripts": {
     "test": "npm run lint && npm run build",
-    "start": "esbuild example/main.js --bundle --outdir=example/dist --jsx-factory=h --servedir=example",
+    "start": "esbuild example/main.js --bundle --outdir=example/dist --jsx-import-source=preact --jsx=automatic --servedir=example",
     "build": "rollup -c --compact",
     "lint": "eslint src test example"
   },
