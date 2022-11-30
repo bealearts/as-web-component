@@ -12,7 +12,8 @@ async function* Counter() {
     this.count--;
   };
 
-  for await (const _ of this) {
+  for await (const obj of this) {
+    console.log(obj.count, this.count);
     yield html`
       <style>
         :host {
@@ -25,7 +26,7 @@ async function* Counter() {
       </style>
 
       <button onClick=${dec}>-</button>
-      <span>${this.count}</span>
+      <span>${obj.count}</span>
       <button onClick=${inc}>+</button>
   `;
   }

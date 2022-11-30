@@ -7,7 +7,7 @@ async function* Dialog(open) {
   };
 
   // eslint-disable-next-line no-param-reassign
-  for await ({ open } of this) {
+  for await (const { props } of this) {
     yield html`
       <style>
           dialog {
@@ -26,7 +26,7 @@ async function* Dialog(open) {
           }
       </style>
 
-      <dialog open=${open}>
+      <dialog open=${props.open}>
         <header>
           <h2>Dialog</h2>
           <button onClick=${close}>X</button>

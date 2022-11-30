@@ -9,7 +9,7 @@ async function* PasswordField(showChars) {
   };
 
   // eslint-disable-next-line no-param-reassign
-  for await ({ showChars } of this) {
+  for await (const { props, password } of this) {
     yield html`
       <style>
         :host {
@@ -17,7 +17,7 @@ async function* PasswordField(showChars) {
         }
       </style>
 
-      <input type="${showChars ? 'text' : 'password'}" value="${this.password}" onInput=${input} />
+      <input type="${props.showChars ? 'text' : 'password'}" value="${password}" onInput=${input} />
     `;
   }
 }

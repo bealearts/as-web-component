@@ -74,7 +74,7 @@ async function* Counter() {
     this.count--;
   }
 
-  for await (_ of this) {
+  for await ({ count } of this) {
     yield html`
       <style>
         :host {
@@ -87,7 +87,7 @@ async function* Counter() {
       </style>
 
       <button onClick=${dec}>-</button>
-      <span>${this.count}</span>
+      <span>${count}</span>
       <button onClick=${inc}>+</button>
   `;
   }

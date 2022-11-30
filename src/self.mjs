@@ -9,8 +9,11 @@ export default function self(instance, attributes) {
   const base = {
     [$instance]: instance,
     [$invalidate]() {
+      window.requestAnimationFrame(() => resolver(this));
+    },
+    get props() {
       const fields = getFieldValues(instance, attributes);
-      window.requestAnimationFrame(() => resolver(fields));
+      return {...fields};
     },
     async* [Symbol.asyncIterator]() {
       while (instance.isConnected) {
@@ -19,26 +22,26 @@ export default function self(instance, attributes) {
           resolver = resolve;
         });
       }
-    }
+    },
+    count: 0
   };
 
   const state = {};
   return new Proxy(base, {
     get(target, prop, receiver) {
-      if (prop in base) {
+      if (prop in target) {
         return Reflect.get(target, prop, receiver);
       }
-
       return state[prop];
     },
 
     set(target, prop, value) {
-      if (prop in base) {
-        throw new TypeError(`${prop} is a reserved property`);
-      }
+      // if (prop in base) {
+      //   throw new TypeError(`${prop} is a reserved property`);
+      // }
 
-      state[prop] = value;
-      target[$invalidate].call(target[$instance]);
+      target[prop] = value;
+      target[$invalidate].call(target);
 
       return true;
     }

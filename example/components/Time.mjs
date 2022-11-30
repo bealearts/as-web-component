@@ -2,13 +2,13 @@ import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
 import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 
 async function* Time() {
-  this.now = now();
+  this.ts = now();
 
   const timer = setInterval(() => {
-    this.now = now();
+    this.ts = now();
   }, 1000);
 
-  for await (const _ of this) {
+  for await (const { ts } of this) {
     yield html`
       <style>
         :host {
@@ -16,7 +16,7 @@ async function* Time() {
         }
       </style>
 
-      <span>${this.now}</span>
+      <span>${ts}</span>
     `;
   }
 
