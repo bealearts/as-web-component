@@ -31,7 +31,7 @@ async function* Dialog(open) {
         <dialog open={props.open}>
           <header>
             <h2>Dialog</h2>
-            <button onClick={close}>X</button>
+            <button type="button" onClick={close}>X</button>
           </header>
           <section>Hello World!</section>
         </dialog>

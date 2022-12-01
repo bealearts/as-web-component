@@ -32,13 +32,13 @@ async function* ExampleApp(name) {
 
         <p>
           <form>
-            <label>Password: </label>
-            <PasswordField showChars />
+            <label htmlFor="password">Password: </label>
+            <PasswordField id="password" showChars />
           </form>
         </p>
 
         <p>
-          <button disabled={dialogOpen} onClick={openDialog}>Show Dialog</button>
+          <button type="button" disabled={dialogOpen} onClick={openDialog}>Show Dialog</button>
           <Dialog open={dialogOpen} onClose={closeDialog} />
         </p>
 

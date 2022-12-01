@@ -53,7 +53,7 @@ export function decorateWithProps(Comp, attributes, privateFields, privateProps)
       set(value) {
         if (privateFields.get(this)[arg] !== value) {
           privateFields.get(this)[arg] = value; // eslint-disable-line no-param-reassign
-          privateProps.get(this).self[$invalidate]();
+          privateProps.get(this).self[arg] = value;
         }
       }
     });
