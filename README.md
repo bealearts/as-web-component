@@ -41,55 +41,57 @@ export default asWebComponent(Header, render);
 ```
 
 ### Async Function (Preact)
-```js
-import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+```jsx
+import { render } from 'preact'
+import asWebComponent from 'as-web-component';
 
 async function GeolocationState() {
   const result = await navigator.permissions.query({
     name:'geolocation'
   });
 
-  return html`
-    <span>Geolocation Permission: <strong>${result.state}</strong></span>
-  `;
+  return <span>Geolocation Permission: <strong>${result.state}</strong></span>;
 }
 
 export default asWebComponent(GeolocationState, render);
 ```
 
 ### Async Generator function (Preact)
-```js
-import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+```jsx
+import { render } from 'preact';
+import asWebComponent from 'as-web-component';
 
 async function* Counter() {
   this.count = 0;
 
   const inc = () => {
     this.count++;
-  }
+  };
 
   const dec = () => {
     this.count--;
-  }
+  };
 
-  for await ({ count } of this) {
-    yield html`
-      <style>
-        :host {
-          display: inline-flex;
-        }
+  for await (const { count } of this) {
+    yield (
+      <>
+        <style>
+          {`
+            :host {
+              display: inline-flex;
+            }
 
-        span {
-          margin: 0 1rem;
-        }
-      </style>
+            span {
+              margin: 0 1rem;
+            }
+          `}
+        </style>
 
-      <button onClick=${dec}>-</button>
-      <span>${count}</span>
-      <button onClick=${inc}>+</button>
-  `;
+        <button type="button" onClick={dec}>-</button>
+        <span>{count}</span>
+        <button type="button" onClick={inc}>+</button>
+      </> 
+    );
   }
 }
 
@@ -111,11 +113,11 @@ SomeComponent.define('another-name');
 ```
 
 #### Use auto unique name in a renderer
-```js
+```jsx
 import SomeComponent from '../SomeComponent.mjs';
-import { html, render } from 'https://unpkg.com/htm/preact/standalone.module.js'
+import { render } from 'preact'
 
-render(html`<${SomeComponent} />`, document.body);
+render(<SomeComponent />, document.body); // Will render in the DOM as <some-component></some-component>
 
 ```
 
