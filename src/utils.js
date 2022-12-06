@@ -53,7 +53,7 @@ export function decorateWithProps(Comp, attributes, privateFields, privateProps)
       set(value) {
         if (privateFields.get(this)[arg] !== value) {
           privateFields.get(this)[arg] = value; // eslint-disable-line no-param-reassign
-          privateProps.get(this).self[arg] = value;
+          privateProps.get(this).self.change++;
         }
       }
     });
@@ -64,10 +64,4 @@ export const $instance = Symbol('instance');
 
 export function getInstance(self) {
   return self[$instance];
-}
-
-export const $invalidate = Symbol('$invalidate');
-
-export function getInvalidate(self) {
-  return self[$invalidate];
 }
