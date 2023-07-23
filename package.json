@@ -3,12 +3,12 @@
   "version": "0.3.0",
   "description": "Web Components from functions",
   "main": "src/asWebComponent.js",
-  "module": "src/asWebComponent.js",
+  "type": "module",
   "scripts": {
     "test": "npm run lint && npm run build",
-    "start": "esbuild example/main.js --bundle --outdir=example/dist --jsx-import-source=preact --jsx=automatic --servedir=example",
-    "build": "rollup -c --compact",
-    "lint": "eslint src test example"
+    "start": "esbuild example/main.js --bundle --outdir=example/dist --jsx-import-source=preact --jsx=automatic --watch --servedir=example",
+    "build": "esbuild src/asWebComponent.js --bundle --format=esm --platform=browser --outdir=dist",
+    "lint": "eslint"
   },
   "keywords": [
     "web",
@@ -16,7 +16,14 @@
     "pure",
     "function"
   ],
-  "author": "David Beale",
+  "author": {
+    "name": "David Beale",
+    "url": "http://bealearts.co.uk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bealearts/as-web-component.git"
+  },
   "license": "MIT",
   "dependencies": {
     "fn-args": "^6.0.0",
@@ -25,9 +32,11 @@
     "uid": "^2.0.1"
   },
   "devDependencies": {
-    "esbuild": "^0.15.16",
+    "esbuild": "^0.18.16",
     "eslint": "^8.23.1",
     "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "lit-html": "^2.4.0",
     "preact": "^10.11.3"
   }

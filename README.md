@@ -4,21 +4,23 @@ Web Components from functions
 
 > UI as a function of state pattern for Web Components.
 >
->  Supports;
-> * Components from pure functions
-> * Components from Async functions
-> * Stateful/Lifecycle components from Async Generator functions
-> * Render DOM using any library; [Preact](https://preactjs.com/), [lit-html](https://lit-html.polymer-project.org/) etc, with or without [JSX](https://reactjs.org/docs/introducing-jsx.html)
-> * Global name clash resolution
-> * ESM first
-> * Zero build tools required (for modern browsers)
-> * Easy DOM testing using data-component attribute
+> Supports;
+>
+> - Components from pure functions
+> - Components from Async functions
+> - Stateful/Lifecycle components from Async Generator functions
+> - Render DOM using any library; [Preact](https://preactjs.com/), [lit-html](https://lit-html.polymer-project.org/) etc, with or without [JSX](https://reactjs.org/docs/introducing-jsx.html)
+> - Global name clash resolution
+> - ESM first
+> - Zero build tools required (for modern browsers)
+> - Easy DOM testing using data-component attribute
 
 Interactive [Example](https://raw.githack.com/bealearts/as-web-component/master/example/index.html)
 
 ## Basic Usage
 
 ### Pure Function (lit-html)
+
 ```js
 import { html, render } from 'https://unpkg.com/lit-html';
 import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
@@ -41,22 +43,28 @@ export default asWebComponent(Header, render);
 ```
 
 ### Async Function (Preact)
+
 ```jsx
-import { render } from 'preact'
+import { render } from 'preact';
 import asWebComponent from 'as-web-component';
 
 async function GeolocationState() {
   const result = await navigator.permissions.query({
-    name:'geolocation'
+    name: 'geolocation'
   });
 
-  return <span>Geolocation Permission: <strong>${result.state}</strong></span>;
+  return (
+    <span>
+      Geolocation Permission: <strong>${result.state}</strong>
+    </span>
+  );
 }
 
 export default asWebComponent(GeolocationState, render);
 ```
 
 ### Async Generator function (Preact)
+
 ```jsx
 import { render } from 'preact';
 import asWebComponent from 'as-web-component';
@@ -87,10 +95,14 @@ async function* Counter() {
           `}
         </style>
 
-        <button type="button" onClick={dec}>-</button>
+        <button type="button" onClick={dec}>
+          -
+        </button>
         <span>{count}</span>
-        <button type="button" onClick={inc}>+</button>
-      </> 
+        <button type="button" onClick={inc}>
+          +
+        </button>
+      </>
     );
   }
 }
@@ -113,20 +125,22 @@ SomeComponent.define('another-name');
 ```
 
 #### Use auto unique name in a renderer
+
 ```jsx
 import SomeComponent from '../SomeComponent.mjs';
-import { render } from 'preact'
+import { render } from 'preact';
 
 render(<SomeComponent />, document.body); // Will render in the DOM as <some-component></some-component>
-
 ```
 
-# Install
+## Install
+
 ```shell
 npm install as-web-component --save
 ```
 
 Or, import directly in the browser
+
 ```js
 import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
 ```

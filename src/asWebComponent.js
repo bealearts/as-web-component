@@ -1,5 +1,10 @@
 import {
-  getUniqueName, getName, getAttributes, getArgumentValues, getFieldValues, decorateWithProps
+  getUniqueName,
+  getName,
+  getAttributes,
+  getArgumentValues,
+  getFieldValues,
+  decorateWithProps
 } from './utils.js';
 import ExportWrapper from './ExportWrapper.js';
 import self from './self.js';
@@ -23,7 +28,9 @@ export default function asWebComponent(func, renderer) {
       this.attachShadow({ mode: 'open' });
 
       privateProps.get(this).self = self(this, attributes);
-      privateProps.get(this).componentFunc = func.bind(privateProps.get(this).self);
+      privateProps.get(this).componentFunc = func.bind(
+        privateProps.get(this).self
+      );
     }
 
     static get observedAttributes() {
@@ -46,7 +53,7 @@ export default function asWebComponent(func, renderer) {
     //   invalidate.call(this);
     // }
 
-    attributeChangedCallback(attr, oldValue, newValue) {
+    attributeChangedCallback(attr, _, newValue) {
       const arg = attributes.get(attr);
       this[arg] = newValue;
     }
@@ -65,7 +72,9 @@ export default function asWebComponent(func, renderer) {
     }
 
     const iterator = result;
-    while (true) { // eslint-disable-line no-constant-condition
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      // eslint-disable-line no-constant-condition
       const iteration = await iterator.next(); // eslint-disable-line no-await-in-loop
       if (iteration.done) break;
       renderer(iteration.value, this.shadowRoot);

@@ -7,7 +7,9 @@ async function GeolocationState() {
   });
 
   return (
-    <span>Geolocation Permission: <strong>{result.state}</strong></span>
+    <span>
+      Geolocation Permission: <strong>{result.state}</strong>
+    </span>
   );
 }
 
