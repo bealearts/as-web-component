@@ -23,7 +23,7 @@ Interactive [Example](https://raw.githack.com/bealearts/as-web-component/master/
 
 ```js
 import { html, render } from 'https://unpkg.com/lit-html';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.js';
 
 function Header(name) {
   return html`
@@ -115,7 +115,7 @@ export default asWebComponent(Counter, render);
 #### Reference from static HTML
 
 ```js
-import SomeComponent from '../SomeComponent.mjs';
+import SomeComponent from '../SomeComponent.js';
 
 // Reference as <some-component></some-component> in HTML
 // Note: If the name does not contain a "-" or is already taken, then a "-{UID}" will be added to the name
@@ -127,7 +127,7 @@ SomeComponent.define('another-name');
 #### Use auto unique name in a renderer
 
 ```jsx
-import SomeComponent from '../SomeComponent.mjs';
+import SomeComponent from '../SomeComponent.js';
 import { render } from 'preact';
 
 render(<SomeComponent />, document.body); // Will render in the DOM as <some-component></some-component>
@@ -142,5 +142,5 @@ npm install as-web-component --save
 Or, import directly in the browser
 
 ```js
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import asWebComponent from 'https://unpkg.com/as-web-component/standalone.js';
 ```

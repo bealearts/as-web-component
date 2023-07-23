@@ -27,10 +27,14 @@ async function* Counter() {
           `}
         </style>
 
-        <button type="button" onClick={dec}>-</button>
+        <button type="button" onClick={dec}>
+          -
+        </button>
         <span>{count}</span>
-        <button type="button" onClick={inc}>+</button>
-      </> 
+        <button type="button" onClick={inc}>
+          +
+        </button>
+      </>
     );
   }
 }

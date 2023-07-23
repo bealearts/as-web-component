@@ -7,7 +7,7 @@
   "scripts": {
     "test": "npm run lint && npm run build",
     "start": "esbuild example/main.js --bundle --outdir=example/dist --jsx-import-source=preact --jsx=automatic --watch --servedir=example",
-    "build": "esbuild src/asWebComponent.js --bundle --format=esm --platform=browser --outdir=dist",
+    "build": "esbuild src/asWebComponent.js --bundle --format=esm --platform=browser --outfile=standalone.js",
     "lint": "eslint"
   },
   "keywords": [

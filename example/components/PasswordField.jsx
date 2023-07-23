@@ -19,7 +19,11 @@ async function* PasswordField(showChars = false) {
           `}
         </style>
 
-        <input type={props.showChars ? 'text' : 'password'} value={password} onInput={input} />
+        <input
+          type={props.showChars ? 'text' : 'password'}
+          value={password}
+          onInput={input}
+        />
       </>
     );
   }

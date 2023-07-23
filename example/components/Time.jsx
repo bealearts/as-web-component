@@ -30,5 +30,5 @@ async function* Time() {
 export default asWebComponent(Time, render);
 
 function now() {
-  return (new Date()).toLocaleTimeString();
+  return new Date().toLocaleTimeString();
 }
