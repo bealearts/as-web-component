@@ -1,6 +1,6 @@
 {
   "name": "as-web-component",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Web Components from functions",
   "main": "src/asWebComponent.js",
   "type": "module",
