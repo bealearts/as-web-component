@@ -9,7 +9,7 @@ import PasswordField from './components/PasswordField.jsx';
 import Dialog from './components/Dialog.jsx';
 import Loading from './components/Loading.jsx';
 
-async function* ExampleApp(name) {
+async functiodn* ExampleApp(name) {
   this.dialogOpen = false;
 
   const openDialog = () => {

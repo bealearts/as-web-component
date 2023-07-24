@@ -11,4 +11,5 @@ async function* Loading(name) {
 
 export default asWebComponent(Loading, render);
 
+// eslint-disable-next-line no-promise-executor-return
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
