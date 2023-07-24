@@ -1,5 +1,5 @@
-import { html, render } from 'https://unpkg.com/lit-html';
-import asWebComponent from 'https://unpkg.com/as-web-component/standalone.mjs';
+import { html, render } from 'lit-html';
+import asWebComponent from '../..';
 
 function Header(name) {
   return html`
@@ -12,7 +12,7 @@ function Header(name) {
     <header>
       <h1>${name}</h1>
     </header>
-`;
+  `;
 }
 
 export default asWebComponent(Header, render);
