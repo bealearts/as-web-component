@@ -8,6 +8,7 @@ import {
 } from './utils.js';
 import ExportWrapper from './ExportWrapper.js';
 import self from './self.js';
+import rawRenderer from './rawRender.js';
 
 export * from './exports.js';
 
