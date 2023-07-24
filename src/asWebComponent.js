@@ -8,11 +8,10 @@ import {
 } from './utils.js';
 import ExportWrapper from './ExportWrapper.js';
 import self from './self.js';
-import rawRenderer from './rawRender.js';
 
 export * from './exports.js';
 
-export default function asWebComponent(func, renderer = rawRenderer) {
+export default function asWebComponent(func, renderer) {
   const component = getName(func);
   const name = getUniqueName(component);
   const attributes = getAttributes(func);

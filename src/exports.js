@@ -1,5 +1,7 @@
 import { getInstance } from './utils.js';
 
+export { default as stringRenderer } from './stringRender.js';
+
 export function isConnected(selfInstance) {
   return getInstance(selfInstance).isConnected;
 }

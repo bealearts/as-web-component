@@ -1,13 +1,14 @@
 import { render } from 'preact';
 import asWebComponent from '..';
 
-import Header from './components/Header.jsx';
+import Header from './components/Header.js';
 import GeolocationState from './components/GeolocationState.jsx';
 import Time from './components/Time.jsx';
 import Counter from './components/Counter.jsx';
 import PasswordField from './components/PasswordField.jsx';
 import Dialog from './components/Dialog.jsx';
 import Loading from './components/Loading.jsx';
+import Footer from './components/Footer.js';
 
 async function* ExampleApp(name) {
   this.dialogOpen = false;
@@ -44,6 +45,7 @@ async function* ExampleApp(name) {
           </button>
           <Dialog open={dialogOpen} onClose={closeDialog} />
         </p>
+        <Footer year={new Date().getFullYear()} />
       </main>
     );
   }
