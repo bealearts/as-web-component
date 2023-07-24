@@ -1,7 +1,7 @@
 import { render } from 'preact';
 import asWebComponent from '../..';
 
-async function* Loading(name) {
+async function* Loading() {
   yield <p>Loading: In Progress</p>;
 
   await delay(1000);

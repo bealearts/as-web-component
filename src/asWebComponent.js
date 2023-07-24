@@ -11,7 +11,7 @@ import self from './self.js';
 
 export * from './exports.js';
 
-export default function asWebComponent(func, renderer) {
+export default function asWebComponent(func, renderer = rawRenderer) {
   const component = getName(func);
   const name = getUniqueName(component);
   const attributes = getAttributes(func);

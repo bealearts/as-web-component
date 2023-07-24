@@ -15,7 +15,7 @@ Web Components from functions
 > - Zero build tools required (for modern browsers)
 > - Easy DOM testing using data-component attribute
 
-Interactive [Demo](https://raw.githack.com/bealearts/as-web-component/main/example/demo.html)
+[Live Demo](https://raw.githack.com/bealearts/as-web-component/main/example/demo.html)
 
 ## Basic Usage
 
