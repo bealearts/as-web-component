@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>as-web-component demo</title>
+    <script type="module">
+      import {
+        html,
+        render
+      } from 'https://unpkg.com/htm/preact/standalone.module.js';
+      import asWebComponent from 'https://unpkg.com/as-web-component/standalone.js';
+
+      async function* CurrentTime() {
+        this.ts = now();
+
+        const timer = setInterval(() => {
+          this.ts = now();
+        }, 1000);
+
+        for await (const { ts } of this) {
+          yield;
+          html`
+            <style>
+              :host {
+                display: inline-flex;
+              }
+
+              <span>{ts}</span>
+            </style>
+          `;
+        }
+
+        clearInterval(timer);
+      }
+
+      export default asWebComponent(CurrentTime, render);
+
+      function now() {
+        return new Date().toLocaleTimeString();
+      }
+    </script>
+  </head>
+  <body>
+    <p>Current Time: <current-time></current-time></p>
+  </body>
+</html>
