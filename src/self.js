@@ -17,6 +17,11 @@ export default function self(instance, attributes) {
       return { ...fields };
     }
   });
+  Object.defineProperty(base, 'children', {
+    get() {
+      return [...instance.childNodes];
+    }
+  });
 
   selfObj = mutationIterator(base, { yieldInit: true });
   return selfObj;

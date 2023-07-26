@@ -9,6 +9,7 @@ import PasswordField from './components/PasswordField.jsx';
 import Dialog from './components/Dialog.jsx';
 import Loading from './components/Loading.jsx';
 import Footer from './components/Footer.js';
+import List from './components/List.jsx';
 
 async function* ExampleApp(name) {
   this.dialogOpen = false;
@@ -30,6 +31,13 @@ async function* ExampleApp(name) {
         <p>
           Current time is: <Time />
         </p>
+
+        <List>
+          <p>One</p>
+          <p>Two</p>
+          <p>Three</p>
+        </List>
+
         <p>
           <Counter />
         </p>
