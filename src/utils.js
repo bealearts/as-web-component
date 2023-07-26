@@ -56,8 +56,7 @@ export function decorateWithProps(
       set(value) {
         if (privateFields.get(this)[arg] !== value) {
           privateFields.get(this)[arg] = value; // eslint-disable-line no-param-reassign
-          // TODO: fix
-          privateProps.get(this).self.change++; // eslint-disable-line no-param-reassign
+          privateProps.get(this).self[$emit]();
         }
       }
     });
@@ -69,3 +68,5 @@ export const $instance = Symbol('instance');
 export function getInstance(self) {
   return self[$instance];
 }
+
+export const $emit = Symbol('emit');

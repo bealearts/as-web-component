@@ -1,5 +1,5 @@
 import mutationIterator from 'mutation-iterator';
-import { $instance, getFieldValues } from './utils.js';
+import { $instance, getFieldValues, $emit } from './utils.js';
 
 export default function self(instance, attributes) {
   let selfObj;
@@ -10,7 +10,6 @@ export default function self(instance, attributes) {
   }
 
   base[$instance] = instance;
-  // TODO: [$emit]: emit
   Object.defineProperty(base, 'props', {
     get() {
       const fields = getFieldValues(instance, attributes, defaultArgs);
@@ -23,6 +22,11 @@ export default function self(instance, attributes) {
     }
   });
 
-  selfObj = mutationIterator(base, { yieldInit: true });
+  selfObj = mutationIterator(base, {
+    yieldInit: true,
+    receiveEmitter: (emitter) => {
+      base[$emit] = emitter;
+    }
+  });
   return selfObj;
 }
