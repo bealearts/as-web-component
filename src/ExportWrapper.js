@@ -6,8 +6,12 @@ export default class ExportWrapper extends String {
     this.element = Comp;
   }
 
-  define(elementName, customElementRegistry = window.customElements) {
+  define(
+    elementName,
+    customElementRegistry = window.customElements,
+    options = undefined
+  ) {
     class Clone extends this.element {}
-    customElementRegistry.define(elementName, Clone);
+    customElementRegistry.define(elementName, Clone, options);
   }
 }

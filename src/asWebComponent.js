@@ -11,7 +11,11 @@ import self from './self.js';
 
 export * from './exports.js';
 
-export default function asWebComponent(func, renderer) {
+export default function asWebComponent(
+  func,
+  renderer,
+  options = { extends: undefined, baseClass: HTMLElement }
+) {
   const component = getName(func);
   const name = getUniqueName(component);
   const attributes = getAttributes(func);
@@ -19,7 +23,7 @@ export default function asWebComponent(func, renderer) {
   const privateProps = new WeakMap();
   const privateFields = new WeakMap();
 
-  class Comp extends HTMLElement {
+  class Comp extends options.baseClass {
     constructor() {
       super();
       privateProps.set(this, {});
@@ -84,7 +88,7 @@ export default function asWebComponent(func, renderer) {
   decorateWithProps(Comp, attributes, privateFields, privateProps);
 
   const exportWrapper = new ExportWrapper(name, Comp);
-  exportWrapper.define(name);
+  exportWrapper.define(name, undefined, options);
 
   return exportWrapper;
 }
