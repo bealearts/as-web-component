@@ -8,7 +8,7 @@ async function* PasswordField(showChars = false) {
     this.password = event.target.value;
   };
 
-  for await (const { props, password } of this) {
+  for await (const { props, password } of this({ showChars })) {
     yield (
       <>
         <style>

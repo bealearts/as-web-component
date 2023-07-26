@@ -20,3 +20,7 @@ export function removeEventListener(selfInstance, ...args) {
   const instance = getInstance(selfInstance);
   return instance.removeEventListener.call(instance, ...args);
 }
+
+export function getDom(selfInstance) {
+  return getInstance(selfInstance).shadowRoot;
+}

@@ -30,10 +30,10 @@ export function getArgumentValues(instance, attributes) {
   return args;
 }
 
-export function getFieldValues(instance, attributes) {
+export function getFieldValues(instance, attributes, defaultArgs = {}) {
   const fields = Object.fromEntries(
     Array.from(attributes.entries()).map(([, arg]) => {
-      let value = instance[arg];
+      let value = instance[arg] ?? defaultArgs[arg];
       value = value === null ? undefined : value;
       return [arg, value];
     })

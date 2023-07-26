@@ -1,12 +1,12 @@
 import { render } from 'preact';
 import asWebComponent, { dispatchEvent } from '../..';
 
-async function* Dialog(open) {
+async function* Dialog(open = true) {
   const close = () => {
     dispatchEvent(this, new Event('close'));
   };
 
-  for await (const { props } of this) {
+  for await (const { props } of this({ open })) {
     yield (
       <>
         <style>
