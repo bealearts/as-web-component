@@ -4,7 +4,8 @@ import {
   getAttributes,
   getArgumentValues,
   getFieldValues,
-  decorateWithProps
+  decorateWithProps,
+  isGeneratorFunction
 } from './utils.js';
 import ExportWrapper from './ExportWrapper.js';
 import self from './self.js';
@@ -19,6 +20,7 @@ export default function asWebComponent(
   const component = getName(func);
   const name = getUniqueName(component);
   const attributes = getAttributes(func);
+  const isGenerator = isGeneratorFunction(func);
 
   const privateProps = new WeakMap();
   const privateFields = new WeakMap();
@@ -64,24 +66,21 @@ export default function asWebComponent(
   }
 
   async function renderLoop() {
-    const fields = getFieldValues(this, attributes);
     const { componentFunc } = privateProps.get(this);
 
-    const result = await componentFunc(...Object.values(fields));
+    if (!isGenerator) {
+      for await (const _ of privateProps.get(this).self) {
+        const fields = getFieldValues(this, attributes);
+        const content = await componentFunc(...Object.values(fields));
+        renderer(content, this.shadowRoot);
+      }
 
-    if (!result.next) {
-      const content = await result;
-      renderer(content, this.shadowRoot);
       return;
     }
 
-    const iterator = result;
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      // eslint-disable-line no-constant-condition
-      const iteration = await iterator.next(); // eslint-disable-line no-await-in-loop
-      if (iteration.done) break;
-      renderer(iteration.value, this.shadowRoot);
+    const fields = getFieldValues(this, attributes);
+    for await (const content of componentFunc(...Object.values(fields))) {
+      renderer(content, this.shadowRoot);
     }
   }
 

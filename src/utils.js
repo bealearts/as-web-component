@@ -70,3 +70,11 @@ export function getInstance(self) {
 }
 
 export const $emit = Symbol('emit');
+
+// eslint-disable-next-line no-empty-function
+const AsyncGenerator = async function* ag() {}.constructor;
+
+export function isGeneratorFunction(func) {
+  if (typeof func !== 'function') return false;
+  return func instanceof AsyncGenerator;
+}
