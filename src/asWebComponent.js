@@ -87,7 +87,10 @@ export default function asWebComponent(
       if (privateProps.get(this).isFirstRender && effect) {
         privateProps.get(this).isFirstRender = false;
         for (const prop in privateProps.get(this).self) {
-          if ('value' in privateProps.get(this).self[prop]) {
+          if (
+            typeof privateProps.get(this).self[prop] === 'object' &&
+            'value' in privateProps.get(this).self[prop]
+          ) {
             effect(() => {
               const _ = privateProps.get(this).self[prop]?.value;
               privateProps.get(this).self[$emit]();
