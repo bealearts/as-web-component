@@ -5,7 +5,8 @@ import {
   getArgumentValues,
   getFieldValues,
   decorateWithProps,
-  isGeneratorFunction
+  isGeneratorFunction,
+  $emit
 } from './utils.js';
 import ExportWrapper from './ExportWrapper.js';
 import self from './self.js';
@@ -15,7 +16,7 @@ export * from './exports.js';
 export default function asWebComponent(
   func,
   renderer,
-  options = { extends: undefined, baseClass: HTMLElement }
+  { baseElement = undefined, baseClass = HTMLElement, effect = undefined } = {}
 ) {
   const component = getName(func);
   const name = getUniqueName(component);
@@ -25,7 +26,7 @@ export default function asWebComponent(
   const privateProps = new WeakMap();
   const privateFields = new WeakMap();
 
-  class Comp extends options.baseClass {
+  class Comp extends baseClass {
     constructor() {
       super();
       privateProps.set(this, {});
@@ -37,6 +38,7 @@ export default function asWebComponent(
       privateProps.get(this).componentFunc = func.bind(
         privateProps.get(this).self
       );
+      privateProps.get(this).isFirstRender = true;
     }
 
     static get observedAttributes() {
@@ -81,13 +83,29 @@ export default function asWebComponent(
     const fields = getFieldValues(this, attributes);
     for await (const content of componentFunc(...Object.values(fields))) {
       renderer(content, this.shadowRoot);
+      // Render on use of this prop .value which is a signal
+      if (privateProps.get(this).isFirstRender && effect) {
+        privateProps.get(this).isFirstRender = false;
+        for (const prop in privateProps.get(this).self) {
+          if (privateProps.get(this).self[prop]?.value) {
+            effect(() => {
+              const _ = privateProps.get(this).self[prop]?.value;
+              privateProps.get(this).self[$emit]();
+            });
+          }
+        }
+      }
     }
   }
 
   decorateWithProps(Comp, attributes, privateFields, privateProps);
 
   const exportWrapper = new ExportWrapper(name, Comp);
-  exportWrapper.define(name, undefined, options);
+  exportWrapper.define(
+    name,
+    undefined,
+    baseElement ? { extends: baseElement } : undefined
+  );
 
   return exportWrapper;
 }

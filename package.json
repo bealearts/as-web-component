@@ -38,6 +38,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^5.0.0",
     "lit-html": "^2.4.0",
-    "preact": "^10.11.3"
+    "preact": "^10.11.3",
+    "@preact/signals": "^1.1.5"
   }
 }

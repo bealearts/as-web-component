@@ -10,6 +10,7 @@ import Dialog from './components/Dialog.jsx';
 import Loading from './components/Loading.jsx';
 import Footer from './components/Footer.js';
 import List from './components/List.jsx';
+import TimeSignals from './components/TimeSignals';
 
 async function* ExampleApp(name) {
   this.dialogOpen = false;
@@ -30,6 +31,9 @@ async function* ExampleApp(name) {
         <Loading />
         <p>
           Current time is: <Time />
+        </p>
+        <p>
+          Current time using Signals is: <TimeSignals />
         </p>
 
         <List>
